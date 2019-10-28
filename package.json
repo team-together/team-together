@@ -1,0 +1,17 @@
+{
+  "name": "team_together_web_app",
+  "version": "0.0.1",
+  "description": "Team Together Web App",
+  "author": "Yunfan Zhang <yzhang20@scu.edu>",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/team-together/team-together.git"
+  },
+  "dependencies": {
+    "express": "^4.16.1"
+  }
+}

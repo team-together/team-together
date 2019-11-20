@@ -1,0 +1,46 @@
+<section>
+    <div class="container my-3">
+        <div class="row no-gutters">
+            <div class="col-12 col-lg-5 align-self-center position-relative">
+                <div class="config">
+                    <nav class="navbar navbar-light">
+                        <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#top-bar-config"
+                            aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                        <div class="collapse navbar-collapse d-lg-block" id="top-bar-config">
+                            <div class="list-group">
+                                <a [routerLink]="['/post']" class="list-group-item list-group-item-action post"><i class="far fa-calendar-plus"></i>&nbsp;&nbsp; Post an event</a>
+                                <a [routerLink]="['/list']" class="list-group-item list-group-item-action"><i class="fas fa-list"></i>&nbsp;&nbsp; My event list</a>
+                                <!-- <a [routerLink]="['/']" class="list-group-item list-group-item-action"><i class="fas fa-share-square"></i>&nbsp;&nbsp; Share</a> -->
+                                <a [routerLink]="['/']" class="list-group-item list-group-item-action"><i class="fas fa-smile"></i>&nbsp;&nbsp; About us</a>
+                                <!-- <a href="#" class="list-group-item list-group-item-action"><i class="far fa-smile"></i>&nbsp;&nbsp; About us</a> -->
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+            <div class="col-8 offset-2 col-lg-2 offset-lg-0 text-center">
+                <a [routerLink]="['/']">
+                    <img class="logo" src="../../assets/main-logo.png">
+                </a>
+            </div>
+            <div class="col-2 col-lg-5 align-self-center">
+                <div class="account">
+                    <nav class="navbar navbar-light d-lg-none">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#top-bar-account"
+                            aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <a [routerLink]="['/login']" class="fas fa-user"></a>
+                        </button>
+                    </nav>
+                    <div class="status d-none d-lg-block">
+                        <span>Hi Bronco. Please </span>
+                        <a [routerLink]="['/login']" class="">Sign In</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</section>

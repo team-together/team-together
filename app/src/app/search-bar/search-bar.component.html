@@ -1,0 +1,17 @@
+<div class="container">
+    <div class="row no-gutters my-3">
+        <div class="col-12 col-md-10 col-lg-8 offset-lg-1 mb-1">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon3">I want to</span>
+                </div>
+                <input [(ngModel)]="keyword" type="text" class="form-control" placeholder="do something?" id="basic-url" aria-describedby="basic-addon3">
+            </div>
+        </div>
+        <div class="col-12 col-md-2 pl-md-1">
+            <div class="input-group-append">
+                <button class="btn btn-danger" type="button" id="button-addon2" (click)="search(keyword)">Together!</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -9,7 +9,7 @@ const path = require('path');
 // App
 const app = express();
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname+'/html/homepage.png'));
+  res.sendFile(path.join(__dirname+'/html/index.html'));
 });
 
 app.listen(PORT, HOST);

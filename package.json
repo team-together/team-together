@@ -12,6 +12,6 @@
     "url": "https://github.com/team-together/team-together.git"
   },
   "dependencies": {
-    "express": "^4.16.1"
+    "express": "^4.17.1"
   }
 }

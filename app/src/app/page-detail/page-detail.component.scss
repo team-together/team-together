@@ -1,0 +1,29 @@
+
+.title{
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.viewed{
+    font-size: 0.5em;
+}
+
+.subtitle{
+    border-bottom: 2px solid #c40d14;
+    font-size: 1em;
+    padding: 0.75em 0;
+    margin-bottom: 0.75em;
+    color: #c40d14;
+    font-weight: bold;
+}
+
+.list-group{
+    li{
+        padding-left: 0;
+
+        i{
+            font-size: 1.25em;
+            margin-right: 0.5em;
+        }
+    }
+}

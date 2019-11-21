@@ -1,0 +1,92 @@
+section{
+    //background-color: #c40d14;
+    //height: 4.5em; 
+
+    .config {
+        position: absolute;
+        z-index: 10;
+        width: 100%;
+        top: -4em;
+
+        .navbar{
+            padding:0;
+            margin-bottom: 0.25em;
+            position: absolute;
+            top: 5em;
+
+            .navbar-toggler{
+                padding: 0.35em 0.5em;
+                margin-bottom: 0.25em;
+    
+                .navbar-toggler-icon{
+                    width: 1em;
+                }
+            }
+
+            .collapse{
+                width: 100%;
+                box-shadow: 3px 3px 10px #a6a6a6;
+
+                .post{
+                    color: #c40d14;
+                }
+            }
+        }
+
+        @media (min-width: 992px) {
+            position: static;
+            top: 0;
+
+            .navbar{
+                position: static;
+                top: 0;
+
+                .collapse{
+                    box-shadow: none;
+
+                    .list-group{
+                        flex-direction: row;
+                    }
+
+                    .list-group-item{
+                        border: none;
+                        font-size: 0.875em;
+                        padding: 0;
+                        margin-right: 0.75em;
+                        width: auto;
+
+                        i{
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .account{
+        float: right;
+
+        .navbar{
+            padding:0;
+            .navbar-toggler{
+                padding: 0.35em 0.5em;
+
+                a{
+                    color: rgba(0,0,0,.5)
+                }
+            }
+        }
+
+        @media (min-width: 992px) {
+            .status{
+                font-size: 0.875em;
+            }
+        }
+    }
+
+    .logo{
+        height: 4.5em;
+        cursor: pointer;
+    }
+}

@@ -1,0 +1,39 @@
+section{
+    height: calc(100vh - 160px);
+    overflow-y: scroll;
+    padding: 0 1em;
+
+    .card{
+        background: #fff;
+        border: 1px solid #dcdee0;
+        border-radius: 4px;
+        
+        .card-img{
+            margin-top: 1.25em;
+            max-width: 15em;
+        }
+    
+        .card-title{
+            font-size: 0.875em;
+        }
+    
+        .card-date{
+            font-size: 0.75em;
+            color: #c40d14;
+        }
+    
+        .card-view{
+            a{
+                width: 100%;
+            }
+    
+            @media (min-width: 992px) {
+                text-align: right;
+    
+                a{
+                    width:auto;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,32 @@
+{
+    "event1": {
+        "title": "I know a place good at cooking Chinese food. Would you like to come?",
+        "description": "Chinese cuisine is an important part of Chinese culture, which includes cuisine originating from the diverse regions of China, as well as from Chinese people in other parts of the world.",
+        "introduction": "I have been working as a Sales Professional for 5 years now. I joined as a Sales executive and worked my way up to the position of Sales Manager within 3 years.",
+        "time": "12/04/2019 3:30 PM",
+        "phone": "(669)295-3846",
+        "email": "LDing2@scu.edu",
+        "address": "61 Washington St, Santa Clara, CA 95050",
+        "image": "../../assets/event1.png"
+    },
+    "event2": {
+        "title": "Lets have a 3vs3 basketball game",
+        "description": "Shoot 3D hoops, challenge your friends in 3-point contests, and perform slam dunks in one of our many free, online basket games!",
+        "introduction": "I have been working as a Sales Professional for 5 years now. I joined as a Sales executive and worked my way up to the position of Sales Manager within 3 years.",
+        "time": "12/12/2019 12:30 PM",
+        "phone": "(669)295-3846",
+        "email": "LDing2@scu.edu",
+        "address": "61 Washington St, Santa Clara, CA 95050",
+        "image": "../../assets/event2.jpg"
+    },
+    "event3": {
+        "title": "Find Roommates!",
+        "description": "Make Your Move To Domicilio Apartments Today! Located Near Santa Clara Transit Center. Schedule Your Tour Of Our Units And Visit Our Refined Community Today! Call Us Now. Wi-Fi Available. Spa/Hot Tub. Underground Parking.",
+        "introduction": "I have been working as a Sales Professional for 5 years now. I joined as a Sales executive and worked my way up to the position of Sales Manager within 3 years.",
+        "time": "01/09/2020 10:30 AM",
+        "phone": "(669)295-3846",
+        "email": "LDing2@scu.edu",
+        "address": "61 Washington St, Santa Clara, CA 95050",
+        "image": "../../assets/event3.jpg"
+    }
+}

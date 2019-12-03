@@ -1,9 +1,13 @@
 section{
-    height: calc(100vh - 160px);
+    height: calc(100vh - 195px);
     overflow: hidden;
+
+    @media (min-width: 992px) {
+      height: calc(100vh - 160px);
+    }
 }
 
 #map {
-  height: 600px;
+  height: 100%;
   width: 100%;
 }

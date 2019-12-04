@@ -3,10 +3,11 @@
 <div class="container mb-5">
     <div class="row">
         <div class="col-12">
-            <p class="title py-3 mb-3">I know a place good at cooking Chinese food. Would you like to come?
-                <button type="button" class="btn btn-sm btn-danger ml-2 viewed">
-                    Viewed <span class="badge badge-light">283</span>
+            <p class="title py-3 mb-3">
+                <button type="button" class="btn btn-sm btn-danger mr-2 viewed">
+                    {{event.type}} 
                 </button>
+                {{event.title}}
             </p>
         </div>
         <div class="col-12 col-lg-7">
@@ -17,7 +18,7 @@
                 <div id="carousel" class="carousel slide mb-1" data-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img src="../../assets/event1.png" class="d-block w-100" alt="...">
+                            <img src="{{event.image}}" class="d-block w-100" alt="...">
                         </div>
                         <!-- <div class="carousel-item">
                                     <img src="../../assets/event2.jpg" class="d-block w-100" alt="...">
@@ -35,9 +36,7 @@
                         <span class="sr-only">Next</span>
                     </a>
                 </div>
-                <div class="description my-2">Chinese cuisine is an important part of Chinese culture, which includes
-                    cuisine originating from the diverse regions of China, as well as from Chinese people in other parts of the
-                    world.
+                <div class="description my-2">{{event.description}}
                 </div>
             </div>
 
@@ -45,17 +44,16 @@
 
             <div class="details pb-4">
                 <div class="subtitle">Host Details</div>
-                <div class="self mb-4">I have been working as a Sales Professional for 5 years now. I joined as a Sales
-                    executive and worked my way up to the position of Sales Manager within 3 years.</div>
+                <div class="self mb-4">{{event.introduction}}</div>
 
                 <p>
                     Contact with me:
                 </p>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item"><i class="fas fa-phone-square"></i>
-                        <a href="tel:6692953846">(669)295-3846</a></li>
+                        <a href="tel:{{event.phone}}">{{event.phone}}</a></li>
                     <li class="list-group-item"><i class="fas fa-envelope"></i>
-                        <a href="mailto:lding2@scu.edu">LDing2@scu.edu</a></li>
+                        <a href="mailto:{{event.email}}">{{event.email}}</a></li>
                     <li class="list-group-item">
                         <i class="fas fa-comment-dots"></i><a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Leave me a message</a>
                     </li>
@@ -71,10 +69,9 @@
 
             <div class="details pb-4">
                 <div class="subtitle">Location Details</div>
-                <p><i class="fas fa-map-marker-alt"></i> 286 Barber Ct Milpitas, CA 95035</p>
+                <p><i class="fas fa-map-marker-alt"></i> {{event.address}}</p>
                 <div style="border:1px solid grey; margin-bottom:12px;">
-                    <iframe width="600" height="300" frameborder="0" style="border:0"
-                src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJwz4wNq_Lj4ARR-PU9hShHFY&key=AIzaSyDynfTkjf4B5VdGrP5VNvEcQGe7BtNa5eY" allowfullscreen></iframe>
+                    <div #mapContainer id="map"></div>
                 </div>
 
                 <button type="button" class="btn btn-outline-danger btn-sm btn-block">Get Directions</button>
@@ -83,18 +80,25 @@
         </div>
 
         <div class="col-12 col-lg-5 mt-5">
-            <div class="alert alert-secondary" role="alert">
-                Please fill out this form if you're planning on attending the event
+            <div *ngIf="!event.join">
+                <div class="alert alert-secondary" role="alert">
+                    Please fill out this form if you're planning on attending the event
+                </div>
+                <div class="form-group">
+                    <label for="eventtitle">Your Name</label>
+                    <input type="text" class="form-control" id="eventtitle" aria-describedby="emailHelp" placeholder="preference name">
+                </div>
+                <div class="form-group">
+                    <label for="eventtitle">Your contact info</label>
+                    <input type="text" class="form-control" id="eventtitle" aria-describedby="emailHelp" placeholder="phone or email">
+                </div>
+                <button type="button" (click)="signUp()" class="btn btn-danger btn-block">I'm in!</button>
             </div>
-            <div class="form-group">
-                <label for="eventtitle">Your Name</label>
-                <input type="text" class="form-control" id="eventtitle" aria-describedby="emailHelp" placeholder="preference name">
+            <div *ngIf="event.join">
+                <div class="alert alert-success" role="alert">
+                        You have already signed up for the event.
+                </div>
             </div>
-            <div class="form-group">
-                <label for="eventtitle">Your contact info</label>
-                <input type="text" class="form-control" id="eventtitle" aria-describedby="emailHelp" placeholder="phone or email">
-            </div>
-            <button type="submit" class="btn btn-danger btn-block">I'm in!</button>
         </div>
     </div>
 </div>

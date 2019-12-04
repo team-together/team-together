@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, NgModule } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import {} from 'googlemaps';
-
-//import { map } from 'rxjs/operators';
+import { FormBuilder } from '@angular/forms';
+import { HttpClient } from "@angular/common/http";
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { } from 'googlemaps';
 import 'rxjs/add/operator/map';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Rx';
 
 
 declare module 'googlemaps';
@@ -15,124 +15,143 @@ declare module 'googlemaps';
   styleUrls: ['./page-post.component.scss']
 })
 
-export class PagePostComponent implements AfterViewInit {
-    constructor(private http: HttpClient) {}
-    @ViewChild('mapContainer', { static: false }) gmap: ElementRef;
 
-    initLat: number = 37.349693;
-    initLng: number = -121.940329;
+  @ViewChild('mapContainer', { static: false }) gmap: ElementRef;
 
-    apiKey = 'AIzaSyDynfTkjf4B5VdGrP5VNvEcQGe7BtNa5eY';
+  checkoutForm;
+  initLat: number = 37.349693;
+  initLng: number = -121.940329;
+  apiKey = 'AIzaSyDynfTkjf4B5VdGrP5VNvEcQGe7BtNa5eY';
 
-    public getJSON(place) {
-        var result = this.http.get(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=${this.apiKey}&location=${this.initLat},${this.initLng}&radius=500&name=${place}`);
-        result.subscribe(data => {
-            console.log(JSON.stringify(data));
-        })
-    }
+  constructor(private formBuilder: FormBuilder, private httpClient: HttpClient, private router: Router) {
+    this.checkoutForm = this.formBuilder.group({
+      address: '',
+      title: '',
+      description: '',
+      time: '',
+      introduction: '',
+      email: '',
+      phone: '',
+    });
+  }
 
-    initMap(lat: number, lng: number) {
-        var map: google.maps.Map;
-        var initCoordinate = new google.maps.LatLng(lat, lng);
-        var initMapOptions: google.maps.MapOptions = {
-              center: initCoordinate,
-              zoom: 17,
-              mapTypeId: google.maps.MapTypeId.ROADMAP
-            };
-        var map = new google.maps.Map(this.gmap.nativeElement, initMapOptions);
-    }
 
-    ngAfterViewInit() {
-        this.initMap(this.initLat, this.initLng);
-        //this.getJSON();
-        //this.getRequest();
-    }
+  initMap(lat: number, lng: number) {
+    var map: google.maps.Map;
+    var initCoordinate = new google.maps.LatLng(lat, lng);
+    var initMapOptions: google.maps.MapOptions = {
+      center: initCoordinate,
+      zoom: 17,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    var map = new google.maps.Map(this.gmap.nativeElement, initMapOptions);
+  }
 
-    //TODO: POST rest API to get coordinates
-    getRequest(place) {
-        let url = `https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=${this.apiKey}&location=${this.initLat},${this.initLng}&radius=500&name=${place}`;
-        //console.log("get url: ", url)
-        //console.log("google map get request",this.http.get(url));
+  ngAfterViewInit() {
+    this.initMap(this.initLat, this.initLng);
+  }
 
-        //console.log(this.http.get(url).map(res => res.json()).subscribe(val => console.log(val)));
-        //console.log(this.http.get(url).map((res: Response) => res.json()));
 
-        var jsonResult = this.http.get(url).subscribe();
-        console.log(jsonResult);
+  placeMarker(placeInfo, map) {
+    var coordinates = placeInfo[0];
+    var lat = coordinates.lat;
+    var lng = coordinates.lng;
+    var initCoordinate = new google.maps.LatLng(lat, lng);
 
-        //console.log(this.http.get(url));
+    var marker = new google.maps.Marker({
+      position: initCoordinate,
+      map: map,
+      title: placeInfo[1]
+    });
 
-        // dummy json result
-        // var dummyCoordinates: any[];
-        //
-        // if (place == 'parking') {
-        //     dummyCoordinates = {
-        //         "lat": 37.3514167,
-        //         "lng": -121.9421215
-        //     };
-        // }
-        // else if (place == 'resturant') {
-        //     dummyCoordinates = {
-        //        "lat": 37.34469929999999,
-        //        "lng": -121.9333565
-        //     };
-        // }
-        // else if (place == 'gym') {
-        //     dummyCoordinates = {
-        //        "lat": 37.3483645,
-        //        "lng": -121.945907
-        //    };
-        // }
-        // else {
-        //     alert(place + " not found");
-        // }
+    marker.setMap(map);
+  }
 
-        //dummy json result
-        var dummyJsonResult = {
-                            "html_attributions": [],
-                            "results": [
-                                {
-                                    "geometry": {
-                                        "location": {
-                                            "lat": 37.3514167,
-                                            "lng": -121.9421215
-                                        }
-                                    },
-                                    "name": "SCU Parking",
-                                    "vicinity": "1065 Alviso St, Santa Clara"
-                                }
-                                ],
-                            "status": "OK"
-                        }
-        if (jsonResult.status == 'OK') {
-            //return [ jsonResult.results[0].name, jsonResult.results[0].vicinity];
-            return [jsonResult.results[0].geometry.location, jsonResult.results[0].name, jsonResult.results[0].vicinity];
+  googleSearch(place) {
+
+    var result = this.httpClient.get(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=${this.apiKey}&location=${this.initLat},${this.initLng}&radius=500000&name=${place}`);
+    result.subscribe(data => {
+      //alert(JSON.stringify(data["results"]));
+      var coordinates = data["results"][0]["geometry"]["location"];
+      var lat = coordinates.lat;
+      var lng = coordinates.lng;
+      var map = this.initMap(lat, lng);
+
+      var placeInfo = [data["results"][0]["geometry"]["location"], data["results"][0]["name"], data["results"][0]["vicinity"]];
+
+      this.placeMarker(placeInfo, map);
+    })
+  }
+
+  ngOnInit() {
+
+    //this.initMap(this.initLat, this.initLng);
+
+    // window.addEventListener('load', function() {
+
+    // }, false);
+
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and prevent submission
+    var validation = Array.prototype.filter.call(forms, function (form) {
+      form.addEventListener('submit', function (event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
         }
-        else {
-            console.log(jsonResult.status);
-            alert(place + " not found");
-        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }
+
+  onSubmit(customerData) {
+
+    var allValid = true;
+    var forms = document.getElementsByClassName('needs-validation');
+    Array.prototype.filter.call(forms, function (form) {
+      if (form.checkValidity() === false) {
+        allValid = false;
+      }
+    });
+
+    if (allValid) {
+      var url = "http://localhost:3000/AddEvent";
+      url += "?title=" + customerData.title;
+      url += "&description=" + customerData.description;
+      url += "&introduction=" + customerData.introduction;
+      url += "&time=" + customerData.time;
+      url += "&phone=" + customerData.phone;
+      url += "&email=" + customerData.email;
+      url += "&address=" + customerData.address;
+
+      this.httpClient.get(url).subscribe(data => {
+        alert("Submission Successful!");
+        this.router.navigateByUrl("list")
+      }, err => {
+        alert("Submission Failed!");
+      });
     }
 
-    placeMarker(placeInfo, map) {
-        var coordinates = placeInfo[0];
-        var lat = coordinates.lat;
-        var lng = coordinates.lng;
-        var initCoordinate = new google.maps.LatLng(lat, lng);
 
-        var marker = new google.maps.Marker({
-              position: initCoordinate,
-              map: map,
-              title: placeInfo[1]
-            });
+    // Process checkout data here
+    //alert(JSON.stringify(customerData));
+    //alert(JSON.stringify(event));
 
-        marker.setMap(map);
-    }
+    //   "event1": {
+    //     "title": "I know a place good at cooking Chinese food. Would you like to come?",
+    //     "description": "Chinese cuisine is an important part of Chinese culture, which includes cuisine originating from the diverse regions of China, as well as from Chinese people in other parts of the world.",
+    //     "introduction": "I have been working as a Sales Professional for 5 years now. I joined as a Sales executive and worked my way up to the position of Sales Manager within 3 years.",
+    //     "time": "12/04/2019 3:30 PM",
+    //     "phone": "(669)295-3846",
+    //     "email": "LDing2@scu.edu",
+    //     "address": "61 Washington St, Santa Clara, CA 95050",
+    //     "image": "../../assets/event1.png"
+    //  },
 
-    alertJSONResult(place) {
-        var json = this.getJSON(place);
-        console.log(json);
-    }
+    //this.items = this.cartService.clearCart();
+    //this.checkoutForm.reset();
+  }
 
     googleSearch(place) {
         var placeInfo = this.getJSON(place);

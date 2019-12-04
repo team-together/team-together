@@ -12,9 +12,9 @@
                             <div class="list-group">
                                 <a [routerLink]="['/post']" class="list-group-item list-group-item-action post"><i class="far fa-calendar-plus"></i>&nbsp;&nbsp; Post an event</a>
                                 <a [routerLink]="['/list']" class="list-group-item list-group-item-action"><i class="fas fa-list"></i>&nbsp;&nbsp; My event list</a>
-                                <!-- <a [routerLink]="['/']" class="list-group-item list-group-item-action"><i class="fas fa-share-square"></i>&nbsp;&nbsp; Share</a> -->
-                                <a [routerLink]="['/']" class="list-group-item list-group-item-action"><i class="fas fa-smile"></i>&nbsp;&nbsp; About us</a>
+                                <a [routerLink]="['/about']" class="list-group-item list-group-item-action"><i class="fas fa-smile"></i>&nbsp;&nbsp; About us</a>
                                 <!-- <a href="#" class="list-group-item list-group-item-action"><i class="far fa-smile"></i>&nbsp;&nbsp; About us</a> -->
+                                <!-- <a [routerLink]="['/']" class="list-group-item list-group-item-action"><i class="fas fa-share-square"></i>&nbsp;&nbsp; Share</a> -->
                             </div>
                         </div>
                     </nav>
@@ -30,13 +30,43 @@
                     <nav class="navbar navbar-light d-lg-none">
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#top-bar-account"
                             aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <a [routerLink]="['/login']" class="fas fa-user"></a>
+                            <a href="javascript:void;" class="fas fa-user" data-toggle="modal" data-target="#loginModal"></a>
                         </button>
                     </nav>
                     <div class="status d-none d-lg-block">
                         <span>Hi Bronco. Please </span>
-                        <a [routerLink]="['/login']" class="">Sign In</a>
+                        <a href="javascript:void;" class="" data-toggle="modal" data-target="#loginModal">Sign In</a>
                     </div>
+                    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Sign In</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="tb-username" class="col-form-label">Username:</label>
+                                    <input type="text" class="form-control" id="tb-username">
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="tb-password" class="col-form-label">Password:</label>
+                                    <input type="text" class="form-control" id="tb-password">
+                                  </div>
+                                  <div class="form-group form-check">
+                                    <input type="checkbox" class="form-check-input" id="tp-check">
+                                    <label class="form-check-label" for="tp-check">Keep me logged in</label>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary">Sign Up</button>
+                              <button type="button" class="btn btn-primary">Sign In</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                 </div>
             </div>
 

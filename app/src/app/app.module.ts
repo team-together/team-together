@@ -1,7 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,6 +15,8 @@ import { PageDetailComponent } from './page-detail/page-detail.component';
 import { PageListComponent } from './page-list/page-list.component';
 import { PageMainComponent } from './page-main/page-main.component';
 import { PageLoginComponent } from './page-login/page-login.component';
+import { EventListComponent } from './event-list/event-list.component';
+import { AboutUsComponent } from './about-us/about-us.component';
 
 @NgModule({
   declarations: [
@@ -25,13 +28,17 @@ import { PageLoginComponent } from './page-login/page-login.component';
     PageDetailComponent,
     PageListComponent,
     PageMainComponent,
-    PageLoginComponent
+    PageLoginComponent,
+    EventListComponent,
+    AboutUsComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
+    HttpClientJsonpModule,
+    ReactiveFormsModule,
     RouterModule.forRoot([
       { path:'',
         children: [
@@ -39,7 +46,8 @@ import { PageLoginComponent } from './page-login/page-login.component';
           { path:'post', component: PagePostComponent },
           { path:'login', component: PageLoginComponent },
           { path:'list', component: PageListComponent },
-          { path:'detail', component: PageDetailComponent },
+          { path:'about', component: AboutUsComponent },
+          { path:'detail/:id', component: PageDetailComponent },
         ] },
     ])
   ],

@@ -14,7 +14,7 @@ declare module 'googlemaps';
   templateUrl: './page-post.component.html',
   styleUrls: ['./page-post.component.scss']
 })
-
+export class PagePostComponent implements OnInit {
 
   @ViewChild('mapContainer', { static: false }) gmap: ElementRef;
 
@@ -153,13 +153,4 @@ declare module 'googlemaps';
     //this.checkoutForm.reset();
   }
 
-    googleSearch(place) {
-        var placeInfo = this.getJSON(place);
-        console.log(coordinates);
-        var coordinates = placeInfo[0];
-        var lat = coordinates.lat;
-        var lng = coordinates.lng;
-        var map = this.initMap(lat, lng);
-        this.placeMarker(placeInfo, map);
-    }
 }

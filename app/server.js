@@ -32,8 +32,26 @@ app.get('/GetEvent/:id', function (req, res) {
 
 	fs.readFile(__dirname + "/data/" + "events.json", 'utf8', function (err, data) {
 		data = JSON.parse(data);
-		var user = data[req.params.id];
-		res.end(JSON.stringify(user));
+		var event = data[req.params.id];
+		res.end(JSON.stringify(event));
+	});
+})
+
+//修改事件详情
+app.get('/SignEvent/:id', function (req, res) {
+	addHeader(res);
+	var fileName = __dirname + "/data/" + "events.json";
+
+	fs.readFile(fileName, 'utf8', function (err, data) {
+		data = JSON.parse(data);
+		var event = data[req.params.id];
+		event["join"] = true;
+
+		var strData = JSON.stringify(data);
+		fs.writeFile(fileName, strData, null, function (err) {
+			res.end("OK");
+		});
+		//res.end(JSON.stringify(event));
 	});
 })
 
@@ -64,7 +82,9 @@ app.get('/AddEvent', function (req, res) {
 			"phone": req.query.phone,
 			"email": req.query.email,
 			"address": req.query.address,
-			"image": "../../assets/event1.png",
+			"image": "../../assets/noimage.jpg",
+			"type": "Event",
+			"join": true
 		};
 
 		var strData = JSON.stringify(data);
@@ -111,15 +131,15 @@ app.get('/User--', function (req, res) {
 	});
 })
 
-//显示用户详情
-app.get('/:id', function (req, res) {
-	fs.readFile(__dirname + "/data/" + "users.json", 'utf8', function (err, data) {
-		data = JSON.parse(data);
-		var user = data["user" + req.params.id];
-		console.log(user);
-		res.end(JSON.stringify(user));
-	});
-})
+// //显示用户详情
+// app.get('/:id', function (req, res) {
+// 	fs.readFile(__dirname + "/data/" + "users.json", 'utf8', function (err, data) {
+// 		data = JSON.parse(data);
+// 		var user = data["user" + req.params.id];
+// 		console.log(user);
+// 		res.end(JSON.stringify(user));
+// 	});
+// })
 
 var server = app.listen(3000, function () {
 	var host = server.address().address;

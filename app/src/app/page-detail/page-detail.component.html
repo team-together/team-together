@@ -3,10 +3,11 @@
 <div class="container mb-5">
     <div class="row">
         <div class="col-12">
-            <p class="title py-3 mb-3">{{event.title}}
-                <button type="button" class="btn btn-sm btn-danger ml-2 viewed">
-                    <!-- Viewed <span class="badge badge-light">283</span> -->
+            <p class="title py-3 mb-3">
+                <button type="button" class="btn btn-sm btn-danger mr-2 viewed">
+                    {{event.type}} 
                 </button>
+                {{event.title}}
             </p>
         </div>
         <div class="col-12 col-lg-7">
@@ -70,8 +71,7 @@
                 <div class="subtitle">Location Details</div>
                 <p><i class="fas fa-map-marker-alt"></i> {{event.address}}</p>
                 <div style="border:1px solid grey; margin-bottom:12px;">
-                    <iframe width="100%" height="300" frameborder="0" style="border:0"
-                src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJwz4wNq_Lj4ARR-PU9hShHFY&key=AIzaSyDynfTkjf4B5VdGrP5VNvEcQGe7BtNa5eY" allowfullscreen></iframe>
+                    <div #mapContainer id="map"></div>
                 </div>
 
                 <button type="button" class="btn btn-outline-danger btn-sm btn-block">Get Directions</button>
@@ -80,18 +80,25 @@
         </div>
 
         <div class="col-12 col-lg-5 mt-5">
-            <div class="alert alert-secondary" role="alert">
-                Please fill out this form if you're planning on attending the event
+            <div *ngIf="!event.join">
+                <div class="alert alert-secondary" role="alert">
+                    Please fill out this form if you're planning on attending the event
+                </div>
+                <div class="form-group">
+                    <label for="eventtitle">Your Name</label>
+                    <input type="text" class="form-control" id="eventtitle" aria-describedby="emailHelp" placeholder="preference name">
+                </div>
+                <div class="form-group">
+                    <label for="eventtitle">Your contact info</label>
+                    <input type="text" class="form-control" id="eventtitle" aria-describedby="emailHelp" placeholder="phone or email">
+                </div>
+                <button type="button" (click)="signUp()" class="btn btn-danger btn-block">I'm in!</button>
             </div>
-            <div class="form-group">
-                <label for="eventtitle">Your Name</label>
-                <input type="text" class="form-control" id="eventtitle" aria-describedby="emailHelp" placeholder="preference name">
+            <div *ngIf="event.join">
+                <div class="alert alert-success" role="alert">
+                        You have already signed up for the event.
+                </div>
             </div>
-            <div class="form-group">
-                <label for="eventtitle">Your contact info</label>
-                <input type="text" class="form-control" id="eventtitle" aria-describedby="emailHelp" placeholder="phone or email">
-            </div>
-            <button type="submit" class="btn btn-danger btn-block">I'm in!</button>
         </div>
     </div>
 </div>

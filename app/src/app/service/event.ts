@@ -7,4 +7,5 @@ export class Event{
     email: string;
     address: string;
     url: string;
+    join: boolean;
   }

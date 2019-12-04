@@ -1,0 +1,40 @@
+.card{
+    background-color:#f2f2f2;
+    border-color:#f2f2f2;
+    
+    .card-img{
+        margin-top: 1.25em;
+        max-width: 15em;
+    }
+
+    .card-title{
+        button{
+            padding: 0 0.5em;
+        }
+    }
+
+    .card-text{
+        font-size: 0.875em;
+    }
+
+    .card-date{
+        font-size: 1em;
+        color: #c40d14;
+    }
+
+    .card-view{
+        
+        a{
+            width: 100%;
+        }
+
+        @media (min-width: 992px) {
+            text-align: right;
+
+            a{
+                width:auto;
+            }
+        }
+
+    }
+}

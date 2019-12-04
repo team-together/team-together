@@ -11,7 +11,12 @@
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
-                            <h5 class="card-title">{{event.title}}</h5>
+                            <h5 class="card-title">
+                                <button type="button" class="btn btn-sm btn-outline-danger mr-2">
+                                    {{event.type}} 
+                                </button>
+                                {{event.title}}
+                            </h5>
                             <p class="card-text">{{event.description}}</p>
                             <p class="card-date"><i class="fas fa-user-clock"></i>&nbsp;&nbsp;{{event.time}}</p>
                             <p class="card-view my-0"><a [routerLink]="[event.url]" class="btn btn-danger">View details</a></p>

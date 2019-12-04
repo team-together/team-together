@@ -1,29 +1,3 @@
-// import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-// import {} from 'googlemaps';
-//
-// declare module 'googlemaps';
-//
-// @Component({
-//   selector: 'app-google-map',
-//   templateUrl: './google-map.component.html',
-//   styleUrls: ['./google-map.component.scss']
-// })
-// export class GoogleMapComponent implements OnInit {
-//     @ViewChild('map', {static: true}) mapElement: ElementRef;
-//     map: google.maps.Map;
-//     constructor() { }
-//
-//     ngOnInit() {
-//         var mapProp = {
-//             center: new google.maps.LatLng(18.5793, 73.8143),
-//             zoom: 15,
-//             mapTypeId: google.maps.MapTypeId.ROADMAP
-//         };
-//         this.map = new google.maps.Map(this.mapElement.nativeElement, mapProp);
-//     }
-//
-// }
-
 import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import {} from 'googlemaps';
 

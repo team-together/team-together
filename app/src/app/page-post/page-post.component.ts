@@ -4,7 +4,7 @@ import {} from 'googlemaps';
 
 //import { map } from 'rxjs/operators';
 import 'rxjs/add/operator/map';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs';
 
 
 declare module 'googlemaps';
@@ -16,13 +16,20 @@ declare module 'googlemaps';
 })
 
 export class PagePostComponent implements AfterViewInit {
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient) {}
     @ViewChild('mapContainer', { static: false }) gmap: ElementRef;
 
     initLat: number = 37.349693;
     initLng: number = -121.940329;
 
     apiKey = 'AIzaSyDynfTkjf4B5VdGrP5VNvEcQGe7BtNa5eY';
+
+    public getJSON(place) {
+        var result = this.http.get(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=${this.apiKey}&location=${this.initLat},${this.initLng}&radius=500&name=${place}`);
+        result.subscribe(data => {
+            console.log(JSON.stringify(data));
+        })
+    }
 
     initMap(lat: number, lng: number) {
         var map: google.maps.Map;
@@ -37,24 +44,51 @@ export class PagePostComponent implements AfterViewInit {
 
     ngAfterViewInit() {
         this.initMap(this.initLat, this.initLng);
+        //this.getJSON();
         //this.getRequest();
     }
 
     //TODO: POST rest API to get coordinates
     getRequest(place) {
-        let url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=${this.apiKey}&location=${this.initLat},${this.initLng}&radius=500&name=${place}`;
+        let url = `https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=${this.apiKey}&location=${this.initLat},${this.initLng}&radius=500&name=${place}`;
         //console.log("get url: ", url)
         //console.log("google map get request",this.http.get(url));
 
         //console.log(this.http.get(url).map(res => res.json()).subscribe(val => console.log(val)));
         //console.log(this.http.get(url).map((res: Response) => res.json()));
 
-        //var jsonResult = this.http.get(url).map((res: Response) => res.json());
+        var jsonResult = this.http.get(url).subscribe();
+        console.log(jsonResult);
 
         //console.log(this.http.get(url));
 
         // dummy json result
-        var jsonResult = {
+        // var dummyCoordinates: any[];
+        //
+        // if (place == 'parking') {
+        //     dummyCoordinates = {
+        //         "lat": 37.3514167,
+        //         "lng": -121.9421215
+        //     };
+        // }
+        // else if (place == 'resturant') {
+        //     dummyCoordinates = {
+        //        "lat": 37.34469929999999,
+        //        "lng": -121.9333565
+        //     };
+        // }
+        // else if (place == 'gym') {
+        //     dummyCoordinates = {
+        //        "lat": 37.3483645,
+        //        "lng": -121.945907
+        //    };
+        // }
+        // else {
+        //     alert(place + " not found");
+        // }
+
+        //dummy json result
+        var dummyJsonResult = {
                             "html_attributions": [],
                             "results": [
                                 {
@@ -69,14 +103,14 @@ export class PagePostComponent implements AfterViewInit {
                                 }
                                 ],
                             "status": "OK"
-                            }
-        //console.log(jsonResult.results[0].geometry.location)
+                        }
         if (jsonResult.status == 'OK') {
+            //return [ jsonResult.results[0].name, jsonResult.results[0].vicinity];
             return [jsonResult.results[0].geometry.location, jsonResult.results[0].name, jsonResult.results[0].vicinity];
         }
         else {
             console.log(jsonResult.status);
-            //TODO: prompt alert window
+            alert(place + " not found");
         }
     }
 
@@ -95,8 +129,13 @@ export class PagePostComponent implements AfterViewInit {
         marker.setMap(map);
     }
 
+    alertJSONResult(place) {
+        var json = this.getJSON(place);
+        console.log(json);
+    }
+
     googleSearch(place) {
-        var placeInfo: any[] = this.getRequest(place);
+        var placeInfo = this.getJSON(place);
         console.log(coordinates);
         var coordinates = placeInfo[0];
         var lat = coordinates.lat;
